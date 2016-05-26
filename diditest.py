@@ -12,8 +12,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR
 from sklearn.ensemble import RandomForestRegressor
 
+
 if __name__ == '__main__':
-    print 'start here~'
     boston_dataset = datasets.load_boston()
     X_full = boston_dataset.data
     Y = boston_dataset.target

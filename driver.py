@@ -4,21 +4,18 @@
 """
 description
 1. load data from train set, save as numpy array
-2. passenger data predict
+2. driver data predict
 """
 
 class DataProvider(object):
     FEATURE_NUM = 10
-    SAMPLE_NUM = 144 * (FEATURE_NUM + 1)
+    MATRIX_NUM = 21 * 144 * (FEATURE_NUM + 1)
 
-    def __init__(self, data_path):
-        self.order_data_path = './data/order/'
-        self.poi_data_pat = './data/poi/'
+    def __init__(self, data_path='training_data/'):
+        self.order_data_path = './data_path/order/'
+        self.poi_data_path = './data_path/poi/'
 
-    def load_feature_xxx():
-        pass
-
-    def save_req_feature_data():
+    def load_feature_xxx(self):
         pass
 
     def save_answer_feature_data():
