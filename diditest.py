@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon May 23 21:17:02 2016
-
 @author: zhaoming
 """
 
@@ -12,8 +11,13 @@ from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR
 from sklearn.ensemble import RandomForestRegressor
 
+import passenger
+
 
 if __name__ == '__main__':
+    p_data = passenger.DataProvider()
+    
+    """
     boston_dataset = datasets.load_boston()
     X_full = boston_dataset.data
     Y = boston_dataset.target
@@ -27,16 +31,17 @@ if __name__ == '__main__':
     plt.scatter(X, Y, color='black')
     plt.plot(X, regressor.predict(X), color='blue', linewidth=3)
 
-    """
+
     regressor = SVR()
     regressor.fit(X, Y)
     plt.scatter(X, Y, color='black')
     plt.scatter(X, regressor.predict(X), color='blue', linewidth=3)
-    """
+
 
     regressor = RandomForestRegressor()
     regressor.fit(X, Y)
     plt.scatter(X, Y, color='black');
     plt.scatter(X, regressor.predict(X), color='blue', linewidth=3)
     plt.show()
+    """
 

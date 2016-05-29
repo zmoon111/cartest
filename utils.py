@@ -4,8 +4,10 @@ Created on Mon May 23 21:17:02 2016
 
 @author: zhaoming
 """
-import time
+import datetime
 import math
+import csv
+import numpy as np
 
 class TestResultGen(object):
     """
@@ -17,19 +19,33 @@ class TestResultGen(object):
             return -1
 
         sum = 0.0
-        for in range(len(predict)):
+        for i in range(len(predict)):
             sum += abs(target[i] - predict[i]/target[i])
 
         return sum/len(predict)
 
 
 class Util(object):
-    def get_time_slot(time_string):
-        t = time.strptime(time_string, "%Y-%m-%d %H:%M:%S")
-        ret_str = time.strftime("%Y-%m-%d", t) + "-"
-        ret_str += str(int(math.floor((t.hour * 24 + t.minute)/10) + 1))
+    BASE_DATETIME = datetime.datetime.strptime('2016-01-01', '%Y-%m-%d')
+    @staticmethod
+    def get_time_slot(timeObj):
+        t = timeObj
+        ret_str = t.strftime("%Y-%m-%d") + '-'
+        ret_str += str(int(math.floor((t.hour * 60 + t.minute)/10) + 1))
+        time_slot = int(math.floor((t.hour * 60 + t.minute)/10) + 1)
+        time_diff = int(math.floor(((t - Util.BASE_DATETIME).total_seconds())/(60*10)))
+        return time_diff, time_slot
 
-        return ret_str
+        #return ret_str
+    @staticmethod
+    def batch_read(filename, batch=50):
+        with open(filename, 'rb') as data_stream:
+            batch_output = list()
+            for n,row in enumerate(csv.reader(data_stream, dialect='excel')):
+                if n > 0 and n % batch ==0:
+                    yield (np.array(batch_output))
+                batch_output.append(row)
+            yield(np.array(batch_output))
 
 
 
